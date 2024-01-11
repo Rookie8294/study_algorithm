@@ -1,14 +1,13 @@
 import java.io.IOException;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
+import java.lang.StringBuilder;
 //Case #1: 1 + 1 = 2
 public class Main{
 	public static void main(String[] args) throws Exception {
        	BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter( new OutputStreamWriter(System.out));
+        StringBuilder sb = new StringBuilder();
         StringTokenizer st;
         int cnt = Integer.parseInt(br.readLine());
         int a = 0;
@@ -17,11 +16,10 @@ public class Main{
             st = new StringTokenizer(br.readLine());
             a = Integer.parseInt(st.nextToken());
             b = Integer.parseInt(st.nextToken());
-            bw.write("Case #"+i+": "+a+" + "+b+" = "+(a+b)+"\n");
+            sb.append("Case #").append(i).append(": ").append(a).append(" + ")
+                .append(b).append(" = ").append(a+b).append("\n");
         }
-        
-        bw.flush();
-        bw.close();
+        System.out.println(sb);
         br.close();
 	}
 }
