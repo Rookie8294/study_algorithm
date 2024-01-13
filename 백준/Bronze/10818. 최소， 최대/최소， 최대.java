@@ -1,29 +1,50 @@
 import java.io.IOException;
-import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 import java.lang.StringBuilder;
 
 public class Main{
     public static void main(String[] args) throws IOException{
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringBuilder sb = new StringBuilder();
-        int cnt = Integer.parseInt(br.readLine());
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int target = Integer.parseInt(st.nextToken());
-        int min = target;
-        int max = target;
+        int cnt = readInt();
         
-        for( int i = 0; i<cnt-1; i++){
-            target = Integer.parseInt(st.nextToken());
-            if( min > target ){
-                min = target;
-            }
-            if( max < target ){
-                max = target;
-            }
+        int[] arr = new int[cnt];
+        for (int i = 0; i < cnt; i++) {
+            arr[i] = readInt();
+        } 
+        
+        int min = 1000001;
+        int max = -1000001;
+        for (int i = 0; i < cnt; i++) {
+            min = Math.min(min, arr[i]);
+            max = Math.max(max, arr[i]);
         }
+
         sb.append(min).append(" ").append(max);
-        System.out.println(sb);
+
+        System.out.print(sb);
+    }
+    
+    private static int readInt() throws IOException {
+        int val = 0;
+        int total = 0;
+        int sign = 1;
+
+        while ((val = System.in.read()) == '\n' || val == ' '){}
+
+        while (val != '\n' && val != ' ') {
+            if (val == '-') {
+                sign = -1;
+            } else {
+                total = total * 10 + (val - '0');
+            }
+            val = System.in.read();
+        }
+
+        if (sign == -1) {
+            total = -total;
+        }
+
+        return total;
     }
 }
