@@ -15,28 +15,17 @@ public class Main{
         }
 
         int max = 0;
-        int dup = 0;
-        int resultIdx = 0;
+        char result = 'A';
         for( int i = 0; i<alphabet.length; i++){
             if( alphabet[i] > max){
                 max = alphabet[i];
-                resultIdx = i;
+                result = (char) ('A' + i);
+            } else if( alphabet[i] == max){
+                result = '?';
             }
         }
 
-        for( int i = 0; i<alphabet.length; i++){
-            if( alphabet[i] == max ){
-                dup++;
-            }
-        }
-
-        if( dup > 1){
-            System.out.print("?");
-        } else{
-            System.out.print((char)(resultIdx + 65));
-        }
-
-
+        System.out.println(result);
         br.close();
 	}
 }
