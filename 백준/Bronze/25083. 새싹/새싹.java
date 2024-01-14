@@ -1,15 +1,11 @@
-import java.lang.StringBuilder;
 public class Main{
 	public static void main(String[] args) {
-        StringBuilder sb = new StringBuilder();
-        
-        sb.append("         ,r'\"7").append("\n");
-        sb.append("r`-_   ,'  ,/").append("\n");
-        sb.append(" \\. \". L_r'").append("\n");
-        sb.append("   `~\\/").append("\n");
-        sb.append("      |").append("\n");
-        sb.append("      |");
-
-        System.out.print(sb);
+        System.out.println("         ,r'\"7");
+	 System.out.println("r`-_   ,'  ,/");
+	 System.out.println(" \\. \". L_r'");
+	 System.out.println("   `~\\/");
+	 System.out.println("      |");
+	 System.out.println("      |");
+   
 	}
 }
