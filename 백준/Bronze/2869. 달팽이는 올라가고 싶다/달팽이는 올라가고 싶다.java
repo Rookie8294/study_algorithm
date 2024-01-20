@@ -10,27 +10,12 @@ public class Main{
         int A = Integer.parseInt(input[0]);
         int B = Integer.parseInt(input[1]);
         int V = Integer.parseInt(input[2]);
-        int cnt = 1;
-
-
-        if( (V-A) > (A-B) ){
-            if( (V-A)%(A-B) != 0 ){
-                cnt += (V-A)/(A-B) + 1;
-            } else {
-                cnt += (V-A)/(A-B);
-            }
-        } else {
-            cnt ++;
-        }
         
-        if( V == A){
-            cnt = 1;
-        }
-
-
-        System.out.println(cnt);
-
+        int bound = V - A;
+        int day = bound / (A - B);
+        if(bound % (A - B) != 0) day++;
         
+        System.out.println(day+1);
 
         br.close();
 	}
