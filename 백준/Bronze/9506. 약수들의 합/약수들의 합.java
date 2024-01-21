@@ -8,39 +8,38 @@ import java.lang.StringBuilder;
 public class Main{
 	public static void main(String[] args) throws IOException {
        	BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
-        StringBuilder str = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         
-        while(true){
-            int N = Integer.parseInt(br.readLine());
-            if(N == -1)
+
+        while (true){
+            int target = Integer.parseInt(br.readLine());
+            if( target == -1 ){
                 break;
-
-            // 약수를 담아 둘 list
-            ArrayList<Integer> list = new ArrayList<>();
-            // 조건에 부합하는지
+            }
+            List<Integer> list = new ArrayList<>();
             int sum = 0;
-
-            for(int i = 1; i < N; i++){
-                // 약수라면 list에 추가하고 합을 구한다.
-                if(N % i == 0) {
+            for( int i = 1; i<target; i++){
+                if( target % i == 0 ){
                     list.add(i);
                     sum += i;
                 }
             }
-            str.append(N);
-            if(N == sum) {
-                str.append(" = ");
-                for (int i = 0; i < list.size()-1; i++)
-                    str.append(list.get(i) + " + ");
-                str.append(list.get(list.size()-1));
+
+            sb.append(target);
+            if( target == sum ){
+                sb.append(" = ");
+                for (int j = 0; j < list.size()-1; j++) {
+                    sb.append(list.get(j)).append(" + ");
+                }
+                sb.append(list.get(list.size()-1));
+            } else {
+                sb.append(" is NOT perfect.");
             }
-            else
-                str.append(" is NOT perfect.");
-            str.append("\n");
+            sb.append("\n");
         }
 
-        System.out.print(str);
-            
+        System.out.println(sb);
+
         br.close();
 	}
 }
