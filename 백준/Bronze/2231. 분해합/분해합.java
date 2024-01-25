@@ -1,32 +1,25 @@
-import java.io.IOException;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import java.io.*;
 
-public class Main{
-	public static void main(String[] args) throws IOException {
-       	BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
+class Main{
+    public static void main(String[] args)throws IOException{
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int n = Integer.parseInt(br.readLine());
+        int size = String.valueOf(n).length();
+        int start = n - (size * 9);
+        int ans = 0;
         
-        int target = Integer.parseInt(br.readLine());
-        String temp = "";
-        int num = 999999;
-        int sum = 0;
-        int result = 0;
-        for( int i = 0; i<target; i++){
-            sum = 0;
-            temp = Integer.toString(target-i);
-            for( int j = 0; j<temp.length(); j++){
-                sum += Character.getNumericValue(temp.charAt(j));
-
+        for(int i = start; i < n; i++){
+            int sum = i;
+            int k = i;
+            while(k > 0){
+                sum += k % 10;
+                k /= 10;
             }
-            if( target - i + sum == target && (target - i - sum) < num ){
-                num = target - i - sum;
-                result = target -i;
+            if(sum == n){
+                ans = i;
+                break;
             }
-
         }
-
-        System.out.println(result);
-
-        br.close();
-	}
+        System.out.println(ans);
+    }
 }
