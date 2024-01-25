@@ -14,8 +14,7 @@ public class Main{
         int num_i = 0;
         int num_j = 0;
         int num_k = 0;
-        int min = 999999;
-        int result = 0;
+        int min = 0;
         for( int i = 0; i<cnt-2; i++){
             for(int j = i+1; j<cnt-1; j++ ){
                 for( int k = j+1; k<cnt; k++){
@@ -23,15 +22,14 @@ public class Main{
                     num_j = Integer.parseInt(cards[j]);
                     num_k = Integer.parseInt(cards[k]);
                     sum = num_i + num_j + num_k;
-                    if( (target-sum) >= 0 && (target-sum) < min ){
-                        min = target-sum;
-                        result = sum;
+                    if(  min < sum && sum <= target){
+                        min = sum;
                     }
                 }
             }
         }
 
-        System.out.println(result);
+        System.out.println(min);
 
         br.close();
 	}
