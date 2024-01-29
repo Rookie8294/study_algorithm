@@ -16,7 +16,18 @@ public class Main{
             arr[i] = target;
         }
 
-        Arrays.sort(arr);
+        //Arrays.sort(arr);
+
+        for( int i = 0; i<arr.length-1; i++){
+            for(int j = i+1; j<arr.length; j++){
+                int temp = 0;
+                if( arr[i] > arr[j]){
+                    temp = arr[j];
+                    arr[j] = arr[i];
+                    arr[i] = temp;
+                }
+            }
+        }
         int avg = sum/5;
 
         System.out.println(avg);
