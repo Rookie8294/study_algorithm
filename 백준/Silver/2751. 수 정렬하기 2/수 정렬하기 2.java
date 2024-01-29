@@ -12,17 +12,21 @@ public class Main{
         StringBuilder sb = new StringBuilder();
         
         int N = Integer.parseInt(br.readLine());
-
-        List<Integer> list = new ArrayList<Integer>();
+        boolean[] countArr = new boolean[2000001];
+        int[] arr = new int[N];
 
         for( int i = 0; i<N; i++){
-            list.add(Integer.parseInt(br.readLine()));
+            arr[i] = Integer.parseInt(br.readLine());
         }
 
-        Collections.sort(list);
+        for( int i = 0; i<N; i++){
+            countArr[arr[i] + 1000000] = true;
+        }
 
-        for( Integer i : list){
-            sb.append(i).append("\n");
+        for( int i = 0; i<countArr.length; i++){
+            if( countArr[i] ){
+                sb.append(i - 1000000).append("\n");
+            }
         }
 
         System.out.println(sb);
