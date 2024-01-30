@@ -12,22 +12,17 @@ public class Main{
         int[] arr = new int[cnt];
         int target = 0;
         //counting array
-        int[] countArr = new int[20000001];
+        int[] countArr = new int[10001];
         //값 배열에 담기
         for(int i = 0; i<cnt; i++){
-            target = Integer.parseInt(br.readLine());
-            if( countArr[target + 10000000] >= 0 ){
-                countArr[target + 10000000] += 1;
-            }
+            countArr[Integer.parseInt(br.readLine())]++;
         }
 
-        for(int i = 0; i<countArr.length; i++){
-            if( countArr[i] > 1 ){
-                for(int j = 0; j<countArr[i]; j++){
-                    sb.append(i - 10000000).append("\n");
-                }
-            } else if( countArr[i] == 1 ){
-                sb.append(i - 10000000).append("\n");
+        for(int i = 1; i<10001; i++){
+            
+            while( countArr[i] > 0){
+                sb.append(i).append("\n");
+                countArr[i]--;
             }
         }
 
