@@ -9,26 +9,28 @@ public class Main{
 	public static void main(String[] args) throws IOException {
        	BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
         StringTokenizer st;
-        StringBuilder sb = new StringBuilder();
+        StringBuilder[] sb = new StringBuilder[201];
 
         int N = Integer.parseInt(br.readLine());
-        String[][] arr = new String[N][2];
-        for(int i = 0; i<N; i++){
+
+        for( int i = 0; i<201; i++){
+            sb[i] = new StringBuilder();
+        }
+
+        for( int i = 0; i<N; i++){
             st = new StringTokenizer(br.readLine());
-            arr[i][0] = st.nextToken();
-            arr[i][1] = st.nextToken();
+            int age = Integer.parseInt(st.nextToken());
+            String name = st.nextToken();
+
+            sb[age].append(age).append(" ").append(name).append("\n");
         }
 
-        Arrays.sort(arr, (a, b)->{
-            return Integer.parseInt(a[0]) - Integer.parseInt(b[0]);
-        });
-
-        for (int i = 0; i < N; i++) {
-            sb.append(arr[i][0]).append(" ").append(arr[i][1]).append("\n");
+        StringBuilder result = new StringBuilder();
+        for( int i = 1; i<sb.length; i++){
+            result.append(sb[i]);
         }
-        
-        System.out.print(sb);
-        
+
+        System.out.println(result);
         br.close();
 	}
 }
