@@ -7,34 +7,29 @@ import java.lang.StringBuilder;
 public class Main{
 	public static void main(String[] args) throws IOException {
        	BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
-        String str = br.readLine();
-        
         StringBuilder sb = new StringBuilder();
-        for( int i = 0; i<str.length(); i++){
-            char c = str.charAt(i);
-            if( c > 96 ){
-               int target = c + 13;
-               if( target > 122 ){
-                   int result = target - 122 + 96;
-                   sb.append((char) result);
-               } else {
-                   sb.append((char) target);
-               }
+        
+        String line = br.readLine();
+        int N = line.length();
 
-            }else if( c > 64 ){
-                int target = c + 13;
-                if( target > 90 ){
-                    int result = target - 90 + 64;
-                    sb.append((char) result);
-                } else {
-                    sb.append((char) target);
-                }
-            } else {
+        for(int i = 0; i<N; i++){
+            char c = line.charAt(i);
+            if( !Character.isLetter(c)){
                 sb.append(c);
+            } else{
+                int target = c + 13;
+                if( Character.isUpperCase(c) && target > 'Z' ){
+                    target -= 26;
+                }
+                if( Character.isLowerCase(c) && target > 'z'){
+                    target -= 26;
+                }
+
+                sb.append((char) target);
             }
         }
-        System.out.print(sb);
-        br.close();
+
+        System.out.println(sb);
 	}
     
 }
