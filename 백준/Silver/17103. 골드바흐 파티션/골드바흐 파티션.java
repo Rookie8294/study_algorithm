@@ -10,33 +10,27 @@ public class Main{
 	    StringBuilder sb = new StringBuilder();
         StringTokenizer st;
         
-        int n = Integer.parseInt(br.readLine());
+        boolean[] primeArr = new boolean[1000001];
+        primeArr[0] = primeArr[1] = true;
 
-        for (int i = 0; i < n; i++) {
-            int target = Integer.parseInt(br.readLine());
-            boolean[] arr = new boolean[target+1];
-
-            arr[0] = true;
-            arr[1] = true;
-            for( int j = 2; j<=Math.sqrt(target); j++){
-                if( arr[j] ){
-                    continue;
-                }
-                for( int k = j*j; k<=target; k+=j){
-                    arr[k] = true;
-                }
+        for( int i = 2; i<=Math.sqrt(1000000); i++){
+            for( int j = i*i; j<=1000000; j+=i){
+                primeArr[j] = true;
             }
-
+        }
+        
+        int n = Integer.parseInt(br.readLine());
+        for( int i = 0; i<n; i++){
             int cnt = 0;
-            for( int j = 2; j<arr.length/2+1; j++){
-                if( !arr[j] && !arr[target-j]){
+            int target = Integer.parseInt(br.readLine());
+            for( int j = 2; j<=target/2; j++){
+                if( !primeArr[j] && !primeArr[target-j]){
                     cnt++;
                 }
             }
-
             sb.append(cnt).append("\n");
-        }
-        System.out.print(sb);       
+        }      
+        System.out.print(sb);
         br.close();
 	}
 }
