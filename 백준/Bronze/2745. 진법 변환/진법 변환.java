@@ -7,41 +7,32 @@ import java.lang.StringBuilder;
 public class Main{
 	public static void main(String[] args) throws IOException {
        	BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
+	    StringBuilder sb = new StringBuilder();
         StringTokenizer st;
         
-        String[] arr = br.readLine().split(" ");
-        String input = arr[0];
-        int decimalSys = Integer.parseInt(arr[1]);
-        int temp = Integer.parseInt(arr[1]);
-        int target;
+        st = new StringTokenizer(br.readLine());
+        String target = st.nextToken();
+        int decimalSystem = Integer.parseInt(st.nextToken());
         int result = 0;
-
-        for( int i = 0; i<input.length(); i++){
-            target = input.codePointAt(i);
-            temp = decimalSys;
-
-            if( target > 64 ){
-                target = target - 55;
+        for(int i = 0; i<target.length();i++){
+            char c = target.charAt(i);
+            int temp = 1;
+            int a = 0;
+            if( c <= '9'){
+                a = c - 48;
             } else {
-                target = target - 48;
+                a = c- 55;
             }
 
-            for( int j = i+1; j<input.length()-1; j++){
-                temp = temp * decimalSys;
-                
+            for( int j = i; j<target.length()-1; j++){
+                temp *= decimalSystem;
             }
-
-            if( i == input.length()-1){
-                temp = 1;
-            }
-            result += target * temp;
-
-            
-
+            result += temp * a;
         }
-        System.out.println(result );
+
+        System.out.println(result);
+        
 
         br.close();
 	}
-
 }
