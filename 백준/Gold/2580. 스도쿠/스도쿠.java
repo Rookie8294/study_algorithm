@@ -79,8 +79,8 @@ public class Main{
         }
 
         //미니 사격형 체크
-        int startX = (x / 3) * 3;
-        int startY = (y / 3) * 3;
+        int startX = x / 3 * 3;
+        int startY = y / 3 * 3;
         for( int i = startY; i<startY + 3; i++){
             for( int j = startX; j<startX + 3; j++){
                 if( square[i][j] == value ){
