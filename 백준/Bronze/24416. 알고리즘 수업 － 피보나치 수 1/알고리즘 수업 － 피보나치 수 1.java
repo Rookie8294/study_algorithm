@@ -1,24 +1,24 @@
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
 import java.lang.StringBuilder;
 
 public class Main{
     
     static int n, cnt;
-    static int[] fibo;
+    static int[] fibArr;
     
 	public static void main(String[] args) throws IOException {
        	BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
-	    StringBuilder sb = new StringBuilder();
-        StringTokenizer st;
+        StringBuilder sb = new StringBuilder();
         
         n = Integer.parseInt(br.readLine());
-        fibo = new int[n];
+        fibArr = new int[n];
+        
         cnt = 0;
         fib(n);
         sb.append(cnt).append(" ");
+        
         cnt = 0;
         fibonacci(n);
         sb.append(cnt);
@@ -37,11 +37,11 @@ public class Main{
     }
     
     static void fibonacci(int n ){
-        fibo[0] = 1;
-        fibo[1] = 1;
+        fibArr[0] = 1;
+        fibArr[1] = 1;
         
         for( int i = 2; i<n; i++){
-            fibo[i] = fibo[i-1] + fibo[i-2];
+            fibArr[i] = fibArr[i-1] + fibArr[i-2];
             cnt++;
         }
     }
