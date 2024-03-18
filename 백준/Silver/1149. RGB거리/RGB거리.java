@@ -4,27 +4,51 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main{
+    
+    static int[][] arr, dp;
+    static int red, green, blue;
+    static int n;
+    
 	public static void main(String[] args) throws IOException {
        	BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
         
-        int n = Integer.parseInt(br.readLine());
-        int[][] arr = new int[n][3];
+        n = Integer.parseInt(br.readLine());
+        arr = new int[n][3];
+
+        red = 0;
+        green = 1;
+        blue = 2;
 
         for(int i = 0; i<n; i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
-            arr[i][0] = Integer.parseInt(st.nextToken());
-            arr[i][1] = Integer.parseInt(st.nextToken());
-            arr[i][2] = Integer.parseInt(st.nextToken());
+            arr[i][red] = Integer.parseInt(st.nextToken());
+            arr[i][green] = Integer.parseInt(st.nextToken());
+            arr[i][blue] = Integer.parseInt(st.nextToken());
         }
 
-        for( int i = 1; i<n; i++){
-            arr[i][0] = Math.min(arr[i-1][1], arr[i-1][2]) + arr[i][0];
-            arr[i][1] = Math.min(arr[i-1][0], arr[i-1][2]) + arr[i][1];
-            arr[i][2] = Math.min(arr[i-1][1], arr[i-1][0]) + arr[i][2];
-        }
+        //재귀호출
+        dp = new int[n][3];
+        dp[0][red] = arr[0][red];
+        dp[0][green] = arr[0][green];
+        dp[0][blue] = arr[0][blue];
 
-        System.out.println( Math.min(Math.min(arr[n-1][0], arr[n-1][1]), arr[n-1][2]));
+        System.out.println(Math.min(Math.min(recur(red, n - 1), recur(green, n - 1)), recur(blue, n - 1)));
 
         br.close();
 	}
+    static int recur(int color, int n){
+
+        if( dp[n][color] == 0 ){
+            if( color == red ){
+                dp[n][red] = Math.min(recur(green, n-1), recur(blue, n-1)) + arr[n][red];
+            } else if( color == green){
+                dp[n][green] = Math.min(recur(red, n-1), recur(blue, n-1)) + arr[n][green];
+            } else {
+                dp[n][blue] = Math.min(recur(red, n-1), recur(green, n-1)) + arr[n][blue];
+            }
+        }
+
+        return dp[n][color];
+
+    }
 }
