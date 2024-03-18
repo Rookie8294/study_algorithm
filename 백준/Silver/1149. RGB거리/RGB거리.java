@@ -12,9 +12,9 @@ public class Main{
 
         for(int i = 0; i<n; i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
-            for( int j = 0; j<3; j++){
-                arr[i][j] = Integer.parseInt(st.nextToken());
-            }
+            arr[i][0] = Integer.parseInt(st.nextToken());
+            arr[i][1] = Integer.parseInt(st.nextToken());
+            arr[i][2] = Integer.parseInt(st.nextToken());
         }
 
         for( int i = 1; i<n; i++){
