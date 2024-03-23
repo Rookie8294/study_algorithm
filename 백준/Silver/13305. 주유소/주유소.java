@@ -1,39 +1,42 @@
-import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
-import java.lang.StringBuilder;
 
-public class Main{
-	public static void main(String[] args) throws IOException {
-       	BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
-	    StringBuilder sb = new StringBuilder();
-        StringTokenizer st;
-        
-         int n = Integer.parseInt(br.readLine());
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        int N = Integer.parseInt(br.readLine());
+
+        long[] distance = new long[N]; //거리 배열
+        long[] cost = new long[N]; //비용 배열
+
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for (int i = 0; i < N; i++) {
+            if (i == N-1) {
+                distance[i] = 0;
+                continue;
+            }
+            distance[i] = Long.parseLong(st.nextToken());
+        }
+
         st = new StringTokenizer(br.readLine());
-        int[] km = new int[n - 1];
-        for( int i = 0; i<km.length; i++){
-            km[i] = Integer.parseInt(st.nextToken());
-        }
-        st = new StringTokenizer(br.readLine());
-        int[] cost = new int[n];
-        for( int i = 0; i<n; i++){
-            cost[i] = Integer.parseInt(st.nextToken());
+        for (int i = 0; i < N; i++) {
+            cost[i] = Long.parseLong(st.nextToken());
         }
 
-        km[0] = cost[0]*km[0];
-        for( int i = 1; i<km.length; i++){
-            int a = cost[i-1]*km[i];
-            int b = cost[i]*km[i];
-
-            int min = Math.min(a, b);
-
-            km[i] = km[i-1] + min;
-        }
+        long sum = 0; //비용의 합
+        long minCost = cost[0]; //지금까지 최소 비용
         
-        System.out.println(km[km.length-1]);
+        for (int i = 0; i < N; i++) {
+            if (cost[i] < minCost) { //최소 비용보다 작을 경우
+                minCost = cost[i]; //최소 비용 갱신
+            }   
+            sum += minCost * distance[i]; //최소비용으로 계산해서 더하기
+        }
 
-        br.close();
-	}
-}
+        System.out.println(sum);
+    }//main
+
+}//class
