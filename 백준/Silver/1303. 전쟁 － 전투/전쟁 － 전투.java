@@ -29,6 +29,7 @@ public class Main{
         }
 
         int white = 0;
+        int blue = 0;
         for( int i = 0;i<m; i++){
             for( int j = 0; j<n; j++){
                 if( !visited[i][j] && graph[i][j] == 'W'){
@@ -36,24 +37,16 @@ public class Main{
                     white += cnt * cnt;
                     cnt = 0;
                 }
-            }
-        }
-        visited = new boolean[m][n];
-        int blue = 0;
-        for( int i = 0;i<m; i++){
-            for( int j = 0; j<n; j++){
-                if( !visited[i][j] && graph[i][j] == 'B'){
+                 if( !visited[i][j] && graph[i][j] == 'B'){
                     dfs(i, j, 'B');
                     blue += cnt * cnt;
                     cnt = 0;
                 }
             }
         }
-
         sb.append(white).append(" ").append(blue);
 
         System.out.println(sb);
-        
 
         br.close();
 	}
