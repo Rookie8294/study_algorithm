@@ -8,24 +8,18 @@ public class Main{
         BufferedReader br = new BufferedReader( new InputStreamReader( System.in ));
         int n = Integer.parseInt(br.readLine());
         
-        dp = new int[1000001];
+        int[] dp = new int[1000001];
+
         dp[0] = 0;
         dp[1] = 1;
         dp[2] = 2;
-        for( int i = 3; i<dp.length; i++){
-            dp[i] = -1;
+
+        for( int i = 3; i<=n; i++){
+            dp[i] = (dp[i-2] + dp[i-1]) % 15746;
         }
-        
-        System.out.println(tile(n));
+
+        System.out.println(dp[n]);
         
     }
     
-    static int tile(int n ){
-        
-        if( dp[n] == -1){
-            return dp[n] = ( tile(n - 1) + tile(n - 2) ) % 15746;
-        }
-        
-        return dp[n];
-    }
 }
