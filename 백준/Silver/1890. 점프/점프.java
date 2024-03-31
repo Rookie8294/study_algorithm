@@ -4,15 +4,12 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 public class Main{
-    static int n;
-    static int[][] gameBoard;
-    static long[][] dp;
 	public static void main(String[] args) throws IOException {
        	BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
         
-        n = Integer.parseInt(br.readLine());
-        gameBoard = new int[n][n];
-        dp = new long[n][n];
+        int n = Integer.parseInt(br.readLine());
+        int[][] gameBoard = new int[n][n];
+        long[][] dp = new long[n][n];
         for( int i = 0; i<n; i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
             for( int j = 0; j<n; j++){
