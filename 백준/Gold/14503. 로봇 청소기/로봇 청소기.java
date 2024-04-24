@@ -1,59 +1,66 @@
-
-
+import java.io.IOException;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.lang.StringBuilder;
 import java.util.*;
 
-public class Main {
-
-    static int N, M, r, c, d;
-    static int[][] arr;
-    static int count = 1; //시작 지점은 항상 청소되어 있지 않음
-    static int[] dx = {-1, 0, 1, 0};
-    static int[] dy = {0, 1, 0, -1};
-
-    public static void main(String[] args) {
+public class Main{
+    static int n, m, r, c, d, result;
+    static int[][] room;
+    static int[] dy = {-1, 0, 1, 0};
+    static int[] dx = {0, 1, 0, -1};
+    public static void main(String[] args) throws IOException {
+	    BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
         
-        Scanner scan = new Scanner(System.in);
-
-        N = scan.nextInt();
-        M = scan.nextInt();
-        r = scan.nextInt();
-        c = scan.nextInt();
-        d = scan.nextInt();
-
-        arr = new int[N][M];
-        for(int i = 0; i < N; i++) {
-            for(int j = 0; j < M; j++) {
-                arr[i][j] = scan.nextInt();
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        st = new StringTokenizer(br.readLine());
+        r = Integer.parseInt(st.nextToken());
+        c = Integer.parseInt(st.nextToken());
+        d = Integer.parseInt(st.nextToken());
+        room = new int[n][m];
+        result = 1;
+        
+        for( int i = 0; i<n; i++){
+            st = new StringTokenizer(br.readLine());
+            for( int j = 0; j<m; j++){
+                room[i][j] = Integer.parseInt(st.nextToken());
             }
         }
-
-        clean(r, c, d);
-        System.out.println(count);
+        
+        dfs(r, c, d);
+        
+        System.out.print(result);
+        
     }
-
-    public static void clean(int x, int y, int dir) {
-
-        arr[x][y] = -1;
-
-        for(int i = 0; i < 4; i++) {
-            dir = (dir+3)%4;
-
-            int nx = x + dx[dir];
-            int ny = y + dy[dir];
-            if(nx >= 0 && ny >= 0 && nx < N && ny < M) {
-                if(arr[nx][ny] == 0) {
-                    count++;
-                    clean(nx, ny, dir);
+    
+    static void dfs(int y, int x, int d){
+        //첫번째 칸은 항상 0이기때문에 청소해야한다.
+        room[y][x] = -1;
+        
+        for(int i = 0; i<4; i++){
+            d = (d+3)%4;
+            int ny = y + dy[d];
+            int nx = x + dx[d];
+            if( ny >= 0 && nx >= 0 && ny < n && nx < m ){
+                if( room[ny][nx] == 0){
+                    result++;
+                    dfs(ny, nx, d);
                     return;
                 }
             }
         }
-
-        int d = (dir + 2) % 4; //반대 방향으로 후진
-        int bx = x + dx[d];
-        int by = y + dy[d];
-        if(bx >= 0 && by >= 0 && bx < N && by < M && arr[bx][by] != 1) {
-            clean(bx, by, dir); //후진이니까 바라보는 방향은 유지
+        
+        //청소기가 뒤로 갔을때
+        int back = (d+2)%4;
+        int by = y + dy[back];
+        int bx = x + dx[back];
+        if( by >= 0 && bx >= 0 && by < n && bx < m && room[by][bx] != 1){
+            dfs(by, bx, d);    
         }
+                   
+            
     }
+        
 }
