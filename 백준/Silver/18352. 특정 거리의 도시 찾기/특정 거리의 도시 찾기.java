@@ -1,57 +1,70 @@
+import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.lang.StringBuilder;
 import java.util.*;
 
-public class Main {
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    static final int INF = -1;
-
-    public static void main(String[] args) throws Exception {
-        new Main().solution();
-    }
-
-    private void solution() throws Exception {
+public class Main{
+     static int n, m, k, x;
+    static ArrayList<Integer>[] city;
+    static int[] visited;
+    static List<Integer> answer;
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader( new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int m = Integer.parseInt(st.nextToken());
-        int k = Integer.parseInt(st.nextToken());
-        int x = Integer.parseInt(st.nextToken());
+         StringBuilder sb = new StringBuilder();
+        n = Integer.parseInt(st.nextToken());
+        m = Integer.parseInt(st.nextToken());
+        k = Integer.parseInt(st.nextToken());
+        x = Integer.parseInt(st.nextToken());
 
-        List<Integer>[] edges = new List[n+1];
-        for (int i = 1; i <= n; i++) edges[i] = new ArrayList<>();
-        for (int i = 0; i < m; i++) {
+        city = new ArrayList[n + 1];
+        visited = new int[n + 1];
+        answer = new ArrayList<>();
+        for( int i = 0; i<n+1; i++){
+            city[i] = new ArrayList<>();
+            visited[i] = -1;
+        }
+
+        for( int i = 0; i<m; i++){
             st = new StringTokenizer(br.readLine());
             int a = Integer.parseInt(st.nextToken());
             int b = Integer.parseInt(st.nextToken());
-            edges[a].add(b);
+
+            //단방향 연결
+            city[a].add(b);
         }
 
-        int[] dist = new int[n+1];
-        Arrays.fill(dist, INF);
-        Queue<Integer> q = new ArrayDeque<>();
-        q.add(x);
-        dist[x] = 0;
+        bfs(x);
 
-        List<Integer> answer = new ArrayList<>();
+        if( answer.isEmpty() ){
+            sb.append(-1);
+        } else {
+            Collections.sort(answer);
+            for( int i : answer ) sb.append(i).append("\n");
+        }
 
-        while (!q.isEmpty()) {
-            int cur = q.poll();
-            if (dist[cur] > k) break;
-            if (dist[cur] == k) answer.add(cur);
+        System.out.print(sb);
 
-            for (int next : edges[cur]) {
-                if (dist[next] != INF) continue;
-                dist[next] = dist[cur]+1;
-                q.add(next);
+
+    }
+
+    static void bfs(int start){
+        Queue<Integer> queue = new LinkedList<>();
+        queue.add(start);
+        visited[start] = 0;
+
+        while (!queue.isEmpty()){
+            int cur = queue.poll();
+            if( visited[cur] > k) break;
+            if( visited[cur] == k ) answer.add(cur);
+
+            for (int idx : city[cur]) {
+                if( visited[idx] != -1 ) continue;
+                visited[idx] = visited[cur]+1;
+                queue.add(idx);
             }
         }
-
-        Collections.sort(answer);
-        StringBuilder sb = new StringBuilder();
-        for (int cur : answer) {
-            sb.append(cur).append('\n');
-        }
-
-        System.out.print(answer.isEmpty() ? -1 : sb);
     }
+
 }
