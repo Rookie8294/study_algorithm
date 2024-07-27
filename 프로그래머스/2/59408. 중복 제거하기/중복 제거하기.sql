@@ -1,2 +1,7 @@
 -- 코드를 입력하세요
-SELECT COUNT(DISTINCT NAME) FROM ANIMAL_INS WHERE NAME != 'NULL';
+select count(*)
+from (SELECT name
+from animal_ins
+where name is not null
+group by name)
+;
