@@ -1,5 +1,6 @@
 -- 코드를 입력하세요
-SELECT name
-from animal_ins
-where (select min(datetime) from animal_ins) = datetime
+select name
+from (SELECT name, rank() over(order by datetime) as rank
+from animal_ins) ranking
+where ranking.rank = 1
 ;
