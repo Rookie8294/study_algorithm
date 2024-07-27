@@ -1,5 +1,5 @@
 -- 코드를 입력하세요
-SELECT MEMBER_ID, MEMBER_NAME, GENDER, date_format(DATE_OF_BIRTH, '%Y-%m-%d') DATE_OF_BIRTH
+SELECT member_id, member_name, gender, to_char(date_of_birth, 'yyyy-mm-dd')
 from member_profile
-where month(date_of_birth) = 3 and gender='W' and tlno is not null
-order by member_id asc;
+where tlno is not null and gender = 'W' and to_char(date_of_birth, 'mm') = '03'
+order by member_id
