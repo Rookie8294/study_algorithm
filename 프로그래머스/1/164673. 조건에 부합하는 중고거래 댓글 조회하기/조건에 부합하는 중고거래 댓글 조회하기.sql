@@ -1,5 +1,5 @@
 -- 코드를 입력하세요
-SELECT TITLE, T1.BOARD_ID, REPLY_ID, T2.WRITER_ID, T2.CONTENTS, DATE_FORMAT(T2.CREATED_DATE, '%Y-%m-%d') CREATE_DATE
-FROM USED_GOODS_BOARD T1 INNER JOIN USED_GOODS_REPLY T2 ON T1.BOARD_ID = T2.BOARD_ID
-WHERE YEAR(T1.CREATED_DATE) = 2022 AND MONTH(T1.CREATED_DATE) = 10
-ORDER BY T2.CREATED_DATE ASC, T1.TITLE ASC;
+SELECT ugb.title board_title, ugb.board_id, ugr.reply_id, ugr.writer_id, ugr.contents, to_char(ugr.created_date, 'yyyy-mm-dd') reply_created_date
+from used_goods_board ugb, used_goods_reply ugr
+where ugb.board_id = ugr.board_id and to_char(ugb.created_date, 'yyyy-mm') = '2022-10'
+order by reply_created_date, board_title
